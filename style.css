@@ -244,17 +244,55 @@ html {
     .site-header {
         padding-block: 1rem;
     }
+    
     .site-header__inner {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
         justify-content: space-between;
-        
     }
+
     .primary-navigation {
+        display: none;
+        position: fixed;
+        inset: 0 0 0 0;
+        background: var(--background-main);
+        padding: min(30vh, 10rem) 2em;
+        transform: translateX(100%);
+        transition: transform 350ms ease-out;
+        z-index: 1000;
+    }
+    
+    .primary-navigation[data-visible="true"] {
+        display: block;
+        transform: translateX(0%);
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+        position: absolute;
+        right: 2rem;
+        z-index: 9999;
+        background: transparent;
+        border: 0;
+        padding: 0.5em;
+        cursor: pointer;
+    }
+
+    .primary-navigation ul {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem 1rem;
+        flex-direction: column;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .primary-navigation a {
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: var(--text-high-contrast);
     }
 
     .site-footer {
@@ -334,7 +372,7 @@ html {
         --card-title-font-size: 1rem;
         --card-title-color: var(--text-brand);
     }
- }
+ 
 
 @layer utilities {
     .text-center {
@@ -406,4 +444,4 @@ html {
 
 
  
- 
+}
