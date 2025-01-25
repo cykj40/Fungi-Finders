@@ -269,10 +269,11 @@ html {
         flex-wrap: wrap;
         gap: 1rem;
         justify-content: space-between;
+        position: relative;
     }
 
     .primary-navigation {
-        display: none;
+        display: block;
         position: fixed;
         inset: 0 0 0 0;
         background: var(--background-main);
@@ -280,17 +281,20 @@ html {
         transform: translateX(100%);
         transition: transform 350ms ease-out;
         z-index: 1000;
+        visibility: hidden;
     }
     
     .primary-navigation[data-visible="true"] {
-        display: block;
         transform: translateX(0%);
+        visibility: visible;
     }
 
     .mobile-nav-toggle {
         display: block;
         position: absolute;
-        right: 2rem;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
         z-index: 9999;
         background: transparent;
         border: 0;
