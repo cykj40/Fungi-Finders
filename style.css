@@ -195,6 +195,12 @@
         margin-block-start: var(--flow-space, 1em);
     }
 
+    .flex-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
     .grid-flow {
         display: grid;
         gap: var(--grid-flow-space, 1rem);
@@ -390,8 +396,13 @@
     .mushroom-guide {
         --card-title-color: var(--text-high-contrast);
         --card-title-font-size: var(--font-size-lg);
-
         --card-gap: 0.75rem;
+    }
+
+    .mushroom-guide select {
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        min-width: 150px;
     }
 
     .faq-bento-grid {
@@ -506,6 +517,11 @@
         padding: 0.5rem 0.5rem 0.5rem 1rem;
         border: 0;
         border-radius: var(--border-radius-2);
+        cursor: pointer;
+    }
+
+    select:hover {
+        background-color: var(--background-accent-light);
     }
 
     .tag-list {
@@ -609,4 +625,12 @@
         white-space: nowrap;
         width: 1px;
     }
+}
+
+.no-results-message {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--background-light);
+    border-radius: var(--border-radius-3);
+    font-size: var(--font-size-lg);
 }
