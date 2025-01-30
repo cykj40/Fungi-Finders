@@ -240,10 +240,10 @@
             }
         }
 
-        .grid-auto-fit {
+        .grid-auto-fill {
             display: grid;
             gap: 1rem;
-            grid-template-columns: repeat(auto-fit,
+            grid-template-columns: repeat(auto-fill,
                     minmax(min(var(--grid-auto-fit-min-column-size, 250px), 100%), 1fr));
         }
     }
