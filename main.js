@@ -2,34 +2,37 @@
 // Theme toggle functionality
 const themeToggle = document.querySelector('.theme-toggle');
 
-// Check for saved theme preference, default to dark if none saved
-const currentTheme = localStorage.getItem('theme') || 'dark';
+// Only run theme toggle code if the button exists
+if (themeToggle) {
+    // Check for saved theme preference, default to dark if none saved
+    const currentTheme = localStorage.getItem('theme') || 'dark';
 
-// Set initial theme
-document.documentElement.setAttribute('data-theme', currentTheme);
-updateThemeToggleIcon(currentTheme);
+    // Set initial theme
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeToggleIcon(currentTheme);
 
-// Theme toggle click handler
-themeToggle.addEventListener('click', () => {
-    const newTheme = document.documentElement.getAttribute('data-theme') === 'light'
-        ? 'dark'
-        : 'light';
+    // Theme toggle click handler
+    themeToggle.addEventListener('click', () => {
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'light'
+            ? 'dark'
+            : 'light';
 
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeToggleIcon(newTheme);
-});
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeToggleIcon(newTheme);
+    });
 
-function updateThemeToggleIcon(theme) {
-    const lightIcon = themeToggle.querySelector('.light-icon');
-    const darkIcon = themeToggle.querySelector('.dark-icon');
+    function updateThemeToggleIcon(theme) {
+        const lightIcon = themeToggle.querySelector('.light-icon');
+        const darkIcon = themeToggle.querySelector('.dark-icon');
 
-    if (theme === 'light') {
-        lightIcon.style.display = 'none';
-        darkIcon.style.display = 'block';
-    } else {
-        lightIcon.style.display = 'block';
-        darkIcon.style.display = 'none';
+        if (theme === 'light') {
+            lightIcon.style.display = 'none';
+            darkIcon.style.display = 'block';
+        } else {
+            lightIcon.style.display = 'block';
+            darkIcon.style.display = 'none';
+        }
     }
 }
 
