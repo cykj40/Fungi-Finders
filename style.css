@@ -1,3 +1,13 @@
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-group(root) {
+    animation-duration: 3s;
+}
+
+
+
 @layer reset {
 
     *,
@@ -147,6 +157,32 @@
         --border-radius-2: 0.5rem;
         --border-radius-3: 0.75rem;
     }
+
+    /* Light theme colors */
+    [data-theme="light"] {
+        /* Make most text dark for contrast */
+        --text-main: var(--clr-brown-900);
+        --text-high-contrast: var(--clr-brown-900);
+        --text-brand: var(--clr-brand-500);
+        --text-brand-light: var(--clr-brand-400);
+
+        /* Only change the background colors */
+        --background-accent-light: var(--clr-green-400);
+        --background-accent-main: var(--clr-green-500);
+        --background-accent-dark: var(--clr-green-600);
+
+        --background-extra-light: var(--clr-white);
+        --background-light: hsl(0, 0%, 95%);
+        --background-main: hsl(0, 0%, 98%);
+        --background-dark: hsl(0, 0%, 90%);
+        --background-extra-dark: hsl(0, 0%, 85%);
+    }
+
+    /* Remove the paragraph-specific color override */
+    [data-theme="light"] p {
+        /* Remove this rule to keep text color consistent */
+        /* color: var(--text-body); */
+    }
 }
 
 @layer base {
@@ -231,6 +267,12 @@
 
     .section {
         padding-block: 3.75rem;
+        /* Scroll animation - commented out
+        view-timeline-name: --section-scroll;
+        animation: fade 1s linear;
+        animation-timeline: view();
+        animation-range: entry 25% exit 75%;
+        */
 
         @media (min-width: 760px) {
             padding-block: 8rem;
@@ -247,6 +289,17 @@
                     minmax(min(var(--grid-auto-fit-min-column-size, 250px), 100%), 1fr));
         }
     }
+
+    /* Scroll fade animation - commented out
+    @keyframes fade {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0.3;
+        }
+    }
+    */
 
     .equal-columns {
         display: grid;
@@ -282,6 +335,13 @@
         flex-wrap: wrap;
         gap: 0.5rem 2rem;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    .site-header__controls {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
     }
 
     .primary-navigation {
@@ -337,14 +397,14 @@
                 font-weight: 700;
             }
 
-            li+li {
+            li + li {
                 margin-top: 1rem;
                 padding-top: 1rem;
                 border-top: 2px solid var(--background-accent-light);
             }
         }
 
-        [aria-expanded="true"]~.primary-navigation {
+        [aria-expanded="true"] ~ .primary-navigation {
             display: block;
         }
     }
@@ -380,7 +440,18 @@
         background-image: url(/assets/hero.webp);
         background-size: cover;
         font-size: var(--font-size-md);
-        color: var(--text-high-contrast);
+        color: var(--clr-white) !important;
+
+        /* Hero scroll animation - commented out
+        animation: fade-out 1s linear;
+        animation-timeline: view();
+        animation-range: entry 50% cover 50%;
+        */
+    }
+
+    .hero p,
+    .hero__title {
+        color: var(--clr-white) !important;
     }
 
     .hero__title {
@@ -389,7 +460,7 @@
         >span {
             display: block;
             font-size: var(--font-size-heading-xl);
-            color: var(--text-brand);
+            color: var(--text-brand) !important;
         }
     }
 
@@ -598,6 +669,16 @@
 
     .background-accent {
         background-color: var(--background-accent-dark);
+        
+        /* Keep text light in this section regardless of theme */
+        h2, p {
+            color: var(--clr-white) !important;
+        }
+        
+        /* Keep the span color consistent */
+        .section-title span {
+            color: var(--text-brand) !important;
+        }
     }
 
     .font-size-sm {
@@ -634,3 +715,80 @@
     border-radius: var(--border-radius-3);
     font-size: var(--font-size-lg);
 }
+
+/* Remove the old theme-toggle styles and add these new ones */
+.theme-toggle {
+    position: relative;
+    width: 3.5rem;
+    height: 1.75rem;
+    background: var(--background-light);
+    border: none;
+    border-radius: 100vmax;
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden;
+}
+
+.theme-toggle::before {
+    content: "";
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: 50%;
+    background: var(--background-accent-main);
+    transition: transform 0.3s ease;
+}
+
+/* Move the circle when in light mode */
+[data-theme="light"] .theme-toggle::before {
+    transform: translateX(1.75rem);
+}
+
+/* Style the icons */
+.theme-toggle .light-icon,
+.theme-toggle .dark-icon {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.theme-toggle .light-icon {
+    right: 0.4rem;
+}
+
+.theme-toggle .dark-icon {
+    left: 0.4rem;
+}
+
+/* Show/hide icons based on theme */
+[data-theme="light"] .theme-toggle .light-icon {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle .dark-icon {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle .light-icon {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle .dark-icon {
+    display: block;
+}
+
+/* Hero fade animation - commented out
+@key-frames fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+*/
+
